@@ -1,6 +1,10 @@
-import './assets/main.css'
+import Vue, { createApp } from "@vue/compat";
+import BootstrapVue from "bootstrap-vue";
+import MainPage from "./MainPage.vue";
 
-import { createApp } from 'vue'
-import App from './App.vue'
+import "./assets/main.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
-createApp(App).mount('#app')
+Vue.use(BootstrapVue);
+createApp(MainPage).mount("#app");
