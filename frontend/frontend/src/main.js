@@ -7,4 +7,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 Vue.use(BootstrapVue);
-createApp(MainPage).mount("#app");
+
+const app = createApp(MainPage);
+app.mount("#app");
