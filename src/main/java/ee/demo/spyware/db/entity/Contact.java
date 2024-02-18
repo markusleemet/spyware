@@ -4,11 +4,11 @@ import ee.demo.spyware.dto.ContactDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,12 +25,4 @@ public class Contact {
 
     @Column(name = "phone_number")
     private String phoneNumber;
-
-    public static Contact from(ContactDto dto) {
-        return Contact.builder()
-                .name(dto.getName())
-                .secretName(dto.getSecretName())
-                .phoneNumber(dto.getPhoneNumber())
-                .build();
-    }
 }

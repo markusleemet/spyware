@@ -1,9 +1,12 @@
 package ee.demo.spyware.dto;
 
-import ee.demo.spyware.db.entity.Contact;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class ContactDto {
     private Long id;
     private String name;

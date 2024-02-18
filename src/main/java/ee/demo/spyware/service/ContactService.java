@@ -1,5 +1,6 @@
 package ee.demo.spyware.service;
 
+import ee.demo.spyware.db.entity.Contact;
 import ee.demo.spyware.db.mapper.ContactMapper;
 import ee.demo.spyware.db.repository.ContactRepository;
 import ee.demo.spyware.dto.ContactDto;
@@ -16,10 +17,12 @@ public class ContactService {
     private final ContactMapper mapper;
 
     public void create(ContactDto contactDto) {
-        repository.save(mapper.toEntity(contactDto));
+        // repository.save(mapper.toEntity(contactDto));
     }
 
     public List<ContactDto> getAll() {
-        return mapper.toDto(repository.findAll());
+        List<Contact> all = repository.findAll();
+        List<ContactDto> dto = mapper.toDto(all);
+        return dto;
     }
 }
