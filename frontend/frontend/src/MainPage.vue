@@ -50,20 +50,13 @@ onBeforeMount(() => {
   margin-left: auto;
   margin-right: auto;
   max-width: 900px;
+  padding: 3rem;
 
-  .inputs-container {
-    display: flex;
-    flex-grow: 1;
-    column-gap: 3rem;
-    padding: 2rem;
+  @media (max-width: 576px) {
+    padding: 0.5rem;
   }
-
-  .disabled {
-    cursor: not-allowed;
-  }
-
-  .clickable {
-    cursor: pointer;
-  }
+}
+.clickable {
+  cursor: pointer;
 }
 </style>

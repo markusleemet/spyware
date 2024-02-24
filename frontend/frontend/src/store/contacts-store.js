@@ -51,8 +51,8 @@ export const useContactStore = defineStore("contacts", () => {
 
     return axios
       .post(BACKEND_URL, newContact.value)
-      .then((contact) => {
-        contacts.value.push(contact);
+      .then(({ data }) => {
+        contacts.value.push(data);
         showSuccessToast.value = true;
         return Promise.resolve();
       })
