@@ -24,4 +24,9 @@ public class ContactRest {
     public List<ContactDto> getAll() {
         return contactService.getAll();
     }
+
+    @DeleteMapping
+    public void delete(@RequestParam long id) {
+        contactService.delete(id);
+    }
 }

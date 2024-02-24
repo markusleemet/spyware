@@ -23,4 +23,8 @@ public class ContactService {
     public List<ContactDto> getAll() {
         return mapper.toDto(repository.findAll());
     }
+
+    public void delete(long id) {
+        repository.deleteById(id);
+    }
 }
