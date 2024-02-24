@@ -1,6 +1,6 @@
 <template>
+  <Toasts />
   <div id="app">
-    <BToast />
     <BCard
       header="Add new contact"
       bg-variant="dark"
@@ -60,6 +60,7 @@ import { BButton, BCard, BTable, BSpinner } from "bootstrap-vue";
 import { onBeforeMount } from "vue";
 import { useContactStore } from "@/store/contacts-store.js";
 import { useVuelidate } from "@vuelidate/core";
+import Toasts from "@/components/toasts.vue";
 
 const contactStore = useContactStore();
 const vuelidate = useVuelidate();

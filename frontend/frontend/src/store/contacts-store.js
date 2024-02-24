@@ -2,12 +2,14 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { ref } from "vue";
 
-const BACKEND_URL = "http://localhost:8080";
+const BACKEND_URL = "http://localhost:8080/contact";
 
 export const useContactStore = defineStore("contacts", () => {
   const contacts = ref([]);
   const isCreating = ref(false);
   const isFetching = ref(true);
+  const showSuccessToast = ref(false);
+  const showErrorToast = ref(false);
   const newContact = ref({
     name: null,
     secretName: null,
@@ -16,9 +18,12 @@ export const useContactStore = defineStore("contacts", () => {
 
   function fetchAll() {
     axios
-      .get(BACKEND_URL + "/contact")
+      .get(BACKEND_URL)
       .then(({ data }) => {
         contacts.value = data;
+      })
+      .catch(() => {
+        showErrorToast.value = true;
       })
       .finally(() => {
         isFetching.value = false;
@@ -35,13 +40,14 @@ export const useContactStore = defineStore("contacts", () => {
     isCreating.value = true;
 
     return axios
-      .post(BACKEND_URL + "/contact", newContact.value)
+      .post(BACKEND_URL, newContact.value)
       .then((contact) => {
         contacts.value.push(contact);
+        showSuccessToast.value = true;
         return Promise.resolve();
-        // TODO add error/success toast
       })
       .catch(() => {
+        showErrorToast.value = true;
         return Promise.reject();
       })
       .finally(() => {
@@ -57,5 +63,7 @@ export const useContactStore = defineStore("contacts", () => {
     isCreating,
     isFetching,
     newContact,
+    showSuccessToast,
+    showErrorToast,
   };
 });
