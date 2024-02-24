@@ -1,18 +1,14 @@
 <template>
   <BFormGroup
-    :id="`${id}-wrapper`"
-    :description="description"
+    :id="`${field}-wrapper`"
     :label="label"
-    :label-for="id"
-    :valid-feedback="validFeedback"
-    :invalid-feedback="invalidFeedback"
+    :label-for="field"
     :state="!vuelidate.$invalid"
   >
     <BFormInput
-      v-model="value"
-      :id="id"
+      v-model="contactStore.newContact[field]"
+      :id="field"
       :placeholder="placeholder"
-      :type="type"
       size="lg"
       :state="!vuelidate.$invalid"
     />
@@ -22,22 +18,20 @@
 <script setup>
 import { useVuelidate } from "@vuelidate/core";
 import { BFormGroup, BFormInput } from "bootstrap-vue";
+import { useContactStore } from "@/store/contacts-store.js";
+import { requiredIf } from "@vuelidate/validators";
 
-import { ref } from "vue";
-
-const value = ref();
+const contactStore = useContactStore();
 
 const props = defineProps({
-  id: { type: String, required: true },
   placeholder: { type: String, required: true },
-  type: { type: String, required: true },
   required: { type: Boolean, default: false },
-  description: { type: String, required: true },
   label: { type: String, required: true },
-  validFeedback: { type: String, required: true },
-  invalidFeedback: { type: String, required: true },
+  field: { type: String, required: true },
 });
-const vuelidate = useVuelidate();
-</script>
 
-<style scoped></style>
+const vuelidate = useVuelidate(
+  { [props.field]: { requiredIf: requiredIf(props.required) } },
+  contactStore.newContact
+);
+</script>

@@ -10,5 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ContactMapper extends Converter<Contact, ContactDto> {
 
+    Contact toEntity(ContactDto dto);
+
     List<ContactDto> toDto(List<Contact> contact);
 }

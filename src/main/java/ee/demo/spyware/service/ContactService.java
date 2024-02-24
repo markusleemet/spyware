@@ -17,7 +17,7 @@ public class ContactService {
     private final ContactMapper mapper;
 
     public void create(ContactDto contactDto) {
-        // repository.save(mapper.toEntity(contactDto));
+        repository.save(mapper.toEntity(contactDto));
     }
 
     public List<ContactDto> getAll() {

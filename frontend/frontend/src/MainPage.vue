@@ -1,36 +1,83 @@
 <template>
   <div id="app">
-    <Input
-      placeholder="Nimi"
-      type="text"
-      description="Pärisnimi"
-      id="name"
-      invalid-feedback="See ei ole pärisnimi"
-      label="Sisesta pärisnimi"
-      required
-      valid-feedback="See on pärisnimi"
-    />
-    <div class="d-flex flex-column">
-      <contact
-        :contact="contact"
-        v-for="contact in contactStore.contacts"
-        :key="contact.id"
-      />
-    </div>
+    <BCard
+      header="Add new contact"
+      bg-variant="dark"
+      text-variant="white"
+      body-class="align-items-center d-flex flex-column"
+      class="my-5"
+    >
+      <div class="inputs-container">
+        <Input placeholder="Name" field="name" label="Enter name *" required />
+        <Input
+          placeholder="Secret name"
+          field="secretName"
+          label="Enter secret name *"
+          required
+        />
+        <Input
+          placeholder="Phone number"
+          field="phoneNumber"
+          label="Enter phone number"
+        />
+      </div>
+      <BButton
+        variant="success"
+        size="lg"
+        @click="contactStore.createContact()"
+        :disabled="vuelidate.$invalid"
+        >Create
+      </BButton>
+    </BCard>
+
+    <BTable
+      striped
+      :items="contactStore.contacts"
+      :fields="['name', 'secretName', 'phoneNumber']"
+      :busy="contactStore.isFetching"
+    >
+      <template #table-busy>
+        <div class="text-center my-2">
+          <BSpinner class="align-middle"></BSpinner>
+        </div>
+      </template>
+    </BTable>
   </div>
 </template>
 
 <script setup>
 import Input from "@/components/Input.vue";
+import { BButton, BCard, BTable, BSpinner } from "bootstrap-vue";
 import { onBeforeMount } from "vue";
-import { useCounterStore } from "@/store/contacts-store.js";
-import Contact from "@/components/contact.vue";
+import { useContactStore } from "@/store/contacts-store.js";
+import { useVuelidate } from "@vuelidate/core";
 
-const contactStore = useCounterStore();
+const contactStore = useContactStore();
+const vuelidate = useVuelidate();
 
 onBeforeMount(() => {
   contactStore.fetchAll();
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
+
+  .inputs-container {
+    display: flex;
+    flex-grow: 1;
+    column-gap: 3rem;
+    padding: 2rem;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+  }
+}
+</style>
