@@ -25,8 +25,8 @@ public class ContactRest {
         return contactService.getAll();
     }
 
-    @DeleteMapping
-    public void delete(@RequestParam long id) {
-        contactService.delete(id); // TODO should remove if frontend doesn't support
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id) {
+        contactService.delete(id);
     }
 }

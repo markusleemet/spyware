@@ -30,6 +30,16 @@ export const useContactStore = defineStore("contacts", () => {
       });
   }
 
+  function deleteContact(id) {
+    axios
+      .delete(`${BACKEND_URL}/${id}`, {})
+      .then(() => {
+        contacts.value = contacts.value.filter((contact) => contact.id !== id);
+      })
+      .catch(() => {})
+      .finally(() => {});
+  }
+
   function resetContactForm() {
     Object.keys(newContact.value).forEach((key) => {
       newContact.value[key] = null;
@@ -60,6 +70,7 @@ export const useContactStore = defineStore("contacts", () => {
     contacts,
     fetchAll,
     createContact,
+    deleteContact,
     isCreating,
     isFetching,
     newContact,

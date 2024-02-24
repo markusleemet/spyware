@@ -1,6 +1,5 @@
 package ee.demo.spyware.service;
 
-import ee.demo.spyware.db.entity.Contact;
 import ee.demo.spyware.db.mapper.ContactMapper;
 import ee.demo.spyware.db.repository.ContactRepository;
 import ee.demo.spyware.dto.ContactDto;

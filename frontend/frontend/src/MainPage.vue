@@ -42,12 +42,21 @@
     <BTable
       striped
       :items="contactStore.contacts"
-      :fields="['name', 'secretName', 'phoneNumber']"
+      :fields="['name', 'secretName', 'phoneNumber', 'actions']"
       :busy="contactStore.isFetching"
     >
       <template #table-busy>
         <div class="text-center my-2">
           <BSpinner class="align-middle"></BSpinner>
+        </div>
+      </template>
+      <template #cell(actions)="row">
+        <div class="d-flex justify-content-end">
+          <BIconTrashFill
+            variant="danger"
+            class="clickable"
+            @click="contactStore.deleteContact(row.item.id)"
+          />
         </div>
       </template>
     </BTable>
@@ -56,7 +65,13 @@
 
 <script setup>
 import Input from "@/components/Input.vue";
-import { BButton, BCard, BTable, BSpinner } from "bootstrap-vue";
+import {
+  BButton,
+  BCard,
+  BTable,
+  BSpinner,
+  BIconTrashFill,
+} from "bootstrap-vue";
 import { onBeforeMount } from "vue";
 import { useContactStore } from "@/store/contacts-store.js";
 import { useVuelidate } from "@vuelidate/core";
@@ -94,6 +109,10 @@ onBeforeMount(() => {
 
   .disabled {
     cursor: not-allowed;
+  }
+
+  .clickable {
+    cursor: pointer;
   }
 }
 </style>
