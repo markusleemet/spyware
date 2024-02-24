@@ -21,8 +21,6 @@ public class ContactService {
     }
 
     public List<ContactDto> getAll() {
-        List<Contact> all = repository.findAll();
-        List<ContactDto> dto = mapper.toDto(all);
-        return dto;
+        return mapper.toDto(repository.findAll());
     }
 }

@@ -3,14 +3,15 @@
     :id="`${field}-wrapper`"
     :label="label"
     :label-for="field"
-    :state="!vuelidate.$invalid"
+    :state="isFieldInvalid"
   >
     <BFormInput
       v-model="contactStore.newContact[field]"
       :id="field"
       :placeholder="placeholder"
       size="lg"
-      :state="!vuelidate.$invalid"
+      :state="isFieldInvalid"
+      @blur="vuelidate.$touch()"
     />
   </BFormGroup>
 </template>
@@ -20,6 +21,7 @@ import { useVuelidate } from "@vuelidate/core";
 import { BFormGroup, BFormInput } from "bootstrap-vue";
 import { useContactStore } from "@/store/contacts-store.js";
 import { requiredIf } from "@vuelidate/validators";
+import {computed} from "vue";
 
 const contactStore = useContactStore();
 
@@ -30,8 +32,14 @@ const props = defineProps({
   field: { type: String, required: true },
 });
 
+
 const vuelidate = useVuelidate(
   { [props.field]: { requiredIf: requiredIf(props.required) } },
   contactStore.newContact
 );
+
+const isFieldInvalid = computed(() => {
+  return vuelidate.value.$dirty ? !vuelidate.value.$invalid : null
+})
+
 </script>

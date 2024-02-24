@@ -6,10 +6,8 @@ const BACKEND_URL = "http://localhost:8080";
 
 export const useContactStore = defineStore("contacts", () => {
   const contacts = ref([]);
-
-  const isCreating = ref(true);
+  const isCreating = ref(false);
   const isFetching = ref(true);
-
   const newContact = ref({
     name: null,
     secretName: null,
@@ -27,17 +25,30 @@ export const useContactStore = defineStore("contacts", () => {
       });
   }
 
+  function resetContactForm() {
+    Object.keys(newContact.value).forEach((key) => {
+      newContact.value[key] = null;
+    });
+  }
+
   function createContact() {
     isCreating.value = true;
 
-    axios.post(BACKEND_URL + "/contact", newContact.value).then((contact) => {
-      contacts.value.push(contact);
-
-      // TODO add error/success toast
-      newContact.value.name = null;
-      newContact.value.secretName = null;
-      newContact.value.phone = null;
-    });
+    return axios
+      .post(BACKEND_URL + "/contact", newContact.value)
+      .then((contact) => {
+        contacts.value.push(contact);
+        setTimeout(() => {}, 1000);
+        return Promise.resolve();
+        // TODO add error/success toast
+      })
+      .catch(() => {
+        return Promise.reject();
+      })
+      .finally(() => {
+        resetContactForm();
+        isCreating.value = false;
+      });
   }
 
   return {

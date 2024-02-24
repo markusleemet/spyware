@@ -24,9 +24,17 @@
       <BButton
         variant="success"
         size="lg"
-        @click="contactStore.createContact()"
+        @click="createContact"
         :disabled="vuelidate.$invalid"
-        >Create
+        class="d-flex align-items-center"
+      >
+        <bSpinner
+          v-if="contactStore.isCreating"
+          type="grow"
+          class="mr-2"
+          small
+        />
+        <span>Create</span>
       </BButton>
     </BCard>
 
@@ -54,6 +62,12 @@ import { useVuelidate } from "@vuelidate/core";
 
 const contactStore = useContactStore();
 const vuelidate = useVuelidate();
+
+function createContact() {
+  contactStore.createContact().then(() => {
+    vuelidate.value.$reset();
+  });
+}
 
 onBeforeMount(() => {
   contactStore.fetchAll();
