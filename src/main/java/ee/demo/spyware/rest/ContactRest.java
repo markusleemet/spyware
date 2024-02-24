@@ -27,6 +27,6 @@ public class ContactRest {
 
     @DeleteMapping
     public void delete(@RequestParam long id) {
-        contactService.delete(id);
+        contactService.delete(id); // TODO should remove if frontend doesn't support
     }
 }

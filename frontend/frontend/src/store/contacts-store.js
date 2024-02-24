@@ -38,7 +38,6 @@ export const useContactStore = defineStore("contacts", () => {
       .post(BACKEND_URL + "/contact", newContact.value)
       .then((contact) => {
         contacts.value.push(contact);
-        setTimeout(() => {}, 1000);
         return Promise.resolve();
         // TODO add error/success toast
       })

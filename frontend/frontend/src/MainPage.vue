@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <BToast />
     <BCard
       header="Add new contact"
       bg-variant="dark"
