@@ -1,8 +1,8 @@
 <template>
   <BCard
     header="Add new contact"
-    bg-variant="dark"
-    text-variant="white"
+    bg-variant="light"
+    text-variant="dark"
     body-class="align-items-center d-flex flex-column"
     class="mb-5 align-self-stretch"
   >
