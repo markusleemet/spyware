@@ -37,7 +37,7 @@ To start up frontend run the following commands in the `/frontend/frontend` fold
 - npm run build
 - npm run start
 
-If everything went successfully frontend should be running on http://127.0.0.1:8001
+If everything went successfully, then frontend should be running on http://127.0.0.1:8001
 
 
 ## License
