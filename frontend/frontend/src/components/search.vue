@@ -6,9 +6,9 @@
         <BDropdownItem
           v-for="field in Object.keys(contactStore.newContact)"
           :key="field"
-          @click="contactStore.searchType = field"
-          >{{ field }}</BDropdownItem
-        >
+          @click="contactStore.searchType = field">
+          {{ field }}
+        </BDropdownItem>
       </BDropdown>
     </template>
   </BInputGroup>

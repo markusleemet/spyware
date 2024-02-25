@@ -21,6 +21,14 @@ export const useContactStore = defineStore("contacts", () => {
   const searchType = ref("name");
   const searchValue = ref("");
 
+  const filteredContacts = computed(() => {
+    return contacts.value.filter((contact) =>
+      contact[searchType.value]
+        .toLowerCase()
+        .includes(searchValue.value.toLowerCase())
+    );
+  });
+
   function fetchAll() {
     axios
       .get(BACKEND_URL)
@@ -41,8 +49,9 @@ export const useContactStore = defineStore("contacts", () => {
       .then(() => {
         contacts.value = contacts.value.filter((contact) => contact.id !== id);
       })
-      .catch(() => {})
-      .finally(() => {});
+      .catch(() => {
+        showErrorToast.value = true;
+      });
   }
 
   function resetContactForm() {
@@ -51,21 +60,13 @@ export const useContactStore = defineStore("contacts", () => {
     });
   }
 
-  const filteredContacts = computed(() => {
-    return contacts.value.filter((contact) =>
-      contact[searchType.value]
-        .toLowerCase()
-        .includes(searchValue.value.toLowerCase())
-    );
-  });
-
   function createContact() {
     isCreating.value = true;
 
     return axios
       .post(BACKEND_URL, newContact.value)
       .then(({ data }) => {
-        contacts.value.push(data);
+        contacts.value.splice(0, 0, data);
         showSuccessToast.value = true;
         return Promise.resolve();
       })

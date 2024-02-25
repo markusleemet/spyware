@@ -1,6 +1,5 @@
 <template>
   <Toasts />
-
   <div id="app">
     <CreationForm />
     <Search class="mb-3" />
@@ -39,7 +38,7 @@ import { onBeforeMount } from "vue";
 import { useContactStore } from "@/store/contacts-store.js";
 import Toasts from "@/components/toasts.vue";
 import CreationForm from "@/components/creation-form.vue";
-import Search from "@/components/Search.vue";
+import Search from "@/components/search.vue";
 
 const contactStore = useContactStore();
 
@@ -64,14 +63,6 @@ onBeforeMount(() => {
 
   .clickable {
     cursor: pointer;
-  }
-
-  .table {
-    :deep(th:nth-of-type(4)9) {
-      div {
-        display: none;
-      }
-    }
   }
 }
 </style>

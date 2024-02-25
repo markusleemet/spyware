@@ -1,6 +1,6 @@
 import { createApp } from "@vue/compat";
 import { BootstrapVue } from "bootstrap-vue";
-import MainPage from "./MainPage.vue";
+import MainPage from "./pages/main-page.vue";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";

@@ -33,10 +33,6 @@ const props = defineProps({
   field: { type: String, required: true },
 });
 
-const errorMessage = computed(() => {
-  return vuelidate.value.$errors?.[0]?.$message;
-});
-
 const vuelidate = useVuelidate(
   {
     [props.field]: {
@@ -56,6 +52,10 @@ const vuelidate = useVuelidate(
   },
   contactStore.newContact
 );
+
+const errorMessage = computed(() => {
+  return vuelidate.value.$errors?.[0]?.$message;
+});
 
 const isFieldInvalid = computed(() => {
   return vuelidate.value.$dirty ? !vuelidate.value.$invalid : null;

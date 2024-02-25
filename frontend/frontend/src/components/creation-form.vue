@@ -28,14 +28,13 @@
       class="d-flex align-items-center"
     >
       <bSpinner v-if="contactStore.isCreating" type="grow" class="mr-2" small />
-
       <span>Create</span>
     </BButton>
   </BCard>
 </template>
 
 <script setup>
-import Input from "@/components/Input.vue";
+import Input from "@/components/contact-input.vue";
 import { BButton, BCard, BSpinner } from "bootstrap-vue";
 import { useContactStore } from "@/store/contacts-store.js";
 import { useVuelidate } from "@vuelidate/core";
