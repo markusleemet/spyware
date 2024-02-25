@@ -11,7 +11,7 @@ import java.util.List;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
-@CrossOrigin(origins = {"http://127.0.0.1:5173", "https://spyware.leemetmarkus.ee"}, allowedHeaders = "*", methods = {DELETE, GET, POST, PUT, OPTIONS})
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {DELETE, GET, POST, PUT, OPTIONS})
 @RequestMapping("/contact")
 @RequiredArgsConstructor
 public class ContactRest {
