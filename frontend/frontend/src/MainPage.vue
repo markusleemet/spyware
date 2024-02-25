@@ -7,7 +7,12 @@
     <BTable
       striped
       :items="contactStore.filteredContacts"
-      :fields="['name', 'secretName', 'phoneNumber', 'actions']"
+      :fields="[
+        'name',
+        'secretName',
+        'phoneNumber',
+        { key: 'action', label: '' },
+      ]"
       :busy="contactStore.isFetching"
     >
       <template #table-busy>
@@ -15,7 +20,7 @@
           <BSpinner class="align-middle"></BSpinner>
         </div>
       </template>
-      <template #cell(actions)="row">
+      <template #cell(action)="row">
         <div class="d-flex justify-content-end">
           <BIconTrashFill
             variant="danger"
@@ -56,8 +61,17 @@ onBeforeMount(() => {
   @media (max-width: 576px) {
     padding: 0.5rem;
   }
-}
-.clickable {
-  cursor: pointer;
+
+  .clickable {
+    cursor: pointer;
+  }
+
+  .table {
+    :deep(th:nth-of-type(4)9) {
+      div {
+        display: none;
+      }
+    }
+  }
 }
 </style>
