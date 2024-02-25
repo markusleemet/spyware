@@ -20,9 +20,10 @@
         </div>
       </template>
       <template #cell(action)="row">
-        <div class="d-flex justify-content-end">
+        <div class="delete-icon-container">
           <BIconTrashFill
             variant="danger"
+            font-scale="1.6"
             class="clickable"
             @click="contactStore.deleteContact(row.item.id)"
           />
@@ -59,6 +60,12 @@ onBeforeMount(() => {
 
   @media (max-width: 576px) {
     padding: 0.5rem;
+  }
+
+  .delete-icon-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
   }
 
   .clickable {
