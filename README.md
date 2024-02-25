@@ -16,15 +16,16 @@ Running example of this project can be accessed [here](https://spyware.leemetmar
 
 ### Database
 
-Make sure you have PostgreSQL running on port 12345. One option for this is to run the following commands in the project root directory. 
-Database structure is initialized with FlyWay migration on backend start.
+Make sure you have PostgreSQL running on port 12345. One option for this is to run the following commands in the project root directory.
 
 - docker build -t spyware-db .
 - docker run -p 12345:5432 -d spyware-db
 
+Database structure is initialized with FlyWay migration on backend start.
+
 ### Frontend
 
-To start upp frontend run the following commands in the `/frontend/frontend` folder
+To start up frontend run the following commands in the `/frontend/frontend` folder
 
 - npm install
 - npm run build
