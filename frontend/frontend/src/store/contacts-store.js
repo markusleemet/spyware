@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { computed, ref } from "vue";
 
-const BACKEND_URL = "http://localhost:8080/contact";
+const BACKEND_URL = process.env.BASE_URL || "http://localhost:8080/contact";
 
 export const useContactStore = defineStore("contacts", () => {
   const contacts = ref([]);
