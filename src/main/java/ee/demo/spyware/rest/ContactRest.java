@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://127.0.0.1:5173", "https://spyware.leemetmarkus.ee"})
+@CrossOrigin(origins = {"http://localhost:8001", "https://spyware.leemetmarkus.ee"})
 @RequestMapping("/contact")
 @RequiredArgsConstructor
 public class ContactRest {

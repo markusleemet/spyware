@@ -23,6 +23,12 @@ Make sure you have PostgreSQL running on port 12345. One option for this is to r
 
 Database structure is initialized with FlyWay migration on backend start.
 
+### Backend
+
+Run the following command in the project root directory.
+
+- ./gradlew bootRun
+
 ### Frontend
 
 To start up frontend run the following commands in the `/frontend/frontend` folder
@@ -31,11 +37,7 @@ To start up frontend run the following commands in the `/frontend/frontend` fold
 - npm run build
 - npm run start
 
-### Backend
-
-Run the following command in the project root directory.
-
-- ./gradlew bootRun
+If everything went successfully frontend should be running on http://127.0.0.1:8001
 
 
 ## License
