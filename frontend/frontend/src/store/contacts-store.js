@@ -1,20 +1,25 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const BACKEND_URL = "http://localhost:8080/contact";
 
 export const useContactStore = defineStore("contacts", () => {
   const contacts = ref([]);
-  const isCreating = ref(false);
-  const isFetching = ref(true);
-  const showSuccessToast = ref(false);
-  const showErrorToast = ref(false);
   const newContact = ref({
     name: null,
     secretName: null,
     phoneNumber: null,
   });
+
+  const isCreating = ref(false);
+  const isFetching = ref(true);
+
+  const showSuccessToast = ref(false);
+  const showErrorToast = ref(false);
+
+  const searchType = ref("name");
+  const searchValue = ref("");
 
   function fetchAll() {
     axios
@@ -46,6 +51,14 @@ export const useContactStore = defineStore("contacts", () => {
     });
   }
 
+  const filteredContacts = computed(() => {
+    return contacts.value.filter((contact) =>
+      contact[searchType.value]
+        .toLowerCase()
+        .includes(searchValue.value.toLowerCase())
+    );
+  });
+
   function createContact() {
     isCreating.value = true;
 
@@ -76,5 +89,8 @@ export const useContactStore = defineStore("contacts", () => {
     newContact,
     showSuccessToast,
     showErrorToast,
+    searchValue,
+    searchType,
+    filteredContacts,
   };
 });

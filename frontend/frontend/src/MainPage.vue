@@ -3,10 +3,10 @@
 
   <div id="app">
     <CreationForm />
-
+    <Search class="mb-3" />
     <BTable
       striped
-      :items="contactStore.contacts"
+      :items="contactStore.filteredContacts"
       :fields="['name', 'secretName', 'phoneNumber', 'actions']"
       :busy="contactStore.isFetching"
     >
@@ -34,6 +34,7 @@ import { onBeforeMount } from "vue";
 import { useContactStore } from "@/store/contacts-store.js";
 import Toasts from "@/components/toasts.vue";
 import CreationForm from "@/components/creation-form.vue";
+import Search from "@/components/Search.vue";
 
 const contactStore = useContactStore();
 
